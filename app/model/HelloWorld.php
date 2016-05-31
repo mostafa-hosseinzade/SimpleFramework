@@ -47,4 +47,9 @@ class HelloWorld extends Model{
         $data['family'] = $this->family;
         return $data;
     }
+
+    public function getTableName() {
+        return "test";
+    }
+
 }

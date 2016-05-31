@@ -96,4 +96,24 @@ abstract class Controller {
         return new \lib\JsonResponse($response);
     }
     
+    /**
+     * This function create a new dbModel
+     * @param tstring $model
+     * @return Class Model
+     */
+    public function Model($model = null) {
+        if($model != null){
+        if(file_exists(__DIR__."/../model/".$model.".php"))
+            require_once __DIR__."/../model/".$model.".php";
+        $model = $this->DB()->getModel($model);
+        return $model;            
+        }
+        $class = get_class($this);
+        $class = trim($class, "app\controller\Controller");
+        if(file_exists(__DIR__."/../model/".$class.".php"))
+            require_once __DIR__."/../model/".$class.".php";
+        $model = $this->DB()->getModel($class);
+        return $model;
+    }
+    
 }

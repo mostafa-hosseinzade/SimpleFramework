@@ -16,6 +16,7 @@ class autoload {
     }
 
     public function run() {
+        try {
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $url = explode('/', $url);
         
@@ -59,7 +60,11 @@ class autoload {
                     echo 'Class Default Not Exists';
                 }
             }
+        }            
+        } catch (\Exception $ex) {
+            echo $ex->getTraceAsString();
         }
+
     }
 
 }

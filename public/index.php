@@ -3,7 +3,7 @@ require_once __DIR__ . '/../app/autoload.php';
 require_once __DIR__.'/../admin/autoload.php';
 
 use app\autoload;
-
+ob_start('ob_gzhandler'); 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $url = explode('/', $url);
 if (isset($url[1])) {
@@ -15,3 +15,4 @@ if (isset($url[1])) {
         $app->run();
     }
 }
+ob_end_flush();

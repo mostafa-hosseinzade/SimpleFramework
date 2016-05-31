@@ -12,6 +12,10 @@ namespace app\core;
  * Base Class Model
  * @author Mr.Mostafa Hosseinzade
  */
-class Model {
+abstract class Model {
+    /**
+     * getTableName
+     */
+    abstract public function getTableName();
     
 }

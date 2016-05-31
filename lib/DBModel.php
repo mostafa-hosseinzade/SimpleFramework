@@ -23,7 +23,7 @@ class DBModel extends DataBase {
         try {
             $m = sprintf("app\model\%s", $this->model);
             $m = new $m();
-            $stmt = $this->pdo->prepare(sprintf("select * from %s", $m->table));
+            $stmt = $this->pdo->prepare(sprintf("select * from %s", $m->getTableName()));
             $stmt->execute();
             $data = array();
             while ($row = $stmt->fetchObject(sprintf("app\model\%s", $this->model))) {
@@ -42,11 +42,11 @@ class DBModel extends DataBase {
      * @param type $id
      * @return type
      */
-    public function findOneByIdModel($id) {
+    public function findOneById($id) {
         try {
             $m = sprintf("app\model\%s", $this->model);
             $m = new $m();
-            $stmt = $this->pdo->prepare(sprintf("select * from %s where id = '%s'", $m->getTable(), $id));
+            $stmt = $this->pdo->prepare(sprintf("select * from %s where id = '%s'", $m->getTableName(), $id));
             $stmt->execute();
             $data = array();
             $data = $stmt->fetchObject(sprintf("app\model\%s", $this->model));
@@ -155,7 +155,7 @@ class DBModel extends DataBase {
     public function updateByModel() {
         try {
             $field = get_object_vars($this->model);
-            $sql = "update " . $this->model->table . " set ";
+            $sql = "update " . $this->model->getTableName() . " set ";
             $count_field = count($field);
             $i = 2;
             foreach ($field as $key => $value) {
