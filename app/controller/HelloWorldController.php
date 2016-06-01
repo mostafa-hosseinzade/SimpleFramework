@@ -15,7 +15,7 @@ use lib\WebService;
 class HelloWorldController extends Controller {
 
     public function index() {
-        var_dump($this->Model()->findAll());    
+        var_dump($this->Model()->findBy(array("name"=>"Mr.Mostafa")));    
     }
 
     public function Show() {
