@@ -62,7 +62,7 @@ class autoload {
                         echo 'Class Default Not Exists';
                     }
                 }
-            } else {
+            } else{
                 if (\file_exists(__DIR__ . "/controller/DefaultController.php")) {
                     require_once __DIR__ . "/controller/DefaultController.php";
                     if (\class_exists("admin\controller\DefaultController", true)) {
@@ -71,7 +71,7 @@ class autoload {
                         echo 'Class Default Not Exists';
                     }
                 } else {
-                    echo 'Class Default Not Exists';
+                    echo 'File Class Default Not Exists';
                 }
             }
         } else {

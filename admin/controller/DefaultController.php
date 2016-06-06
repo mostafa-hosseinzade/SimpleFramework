@@ -1,17 +1,10 @@
 <?php
+namespace admin\controller;
+use admin\core\Controller;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+class DefaultController extends Controller{
+    public function index() {
+        echo '<h1>Default Controller';
+    }
 
-
-/**
- * Description of Default
- *
- * @author administrator
- */
-class DefaultController {
-//put your code here
 }

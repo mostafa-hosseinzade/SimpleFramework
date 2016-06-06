@@ -26,8 +26,8 @@ class DBTable extends DataBase {
         try {
             $stmt = $this->pdo->prepare("select * from " . $this->table);
             $stmt->execute();
-            $data = $stmt->fetchAll();
-            $this->CloseLink();
+            $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            
             return $data;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
@@ -45,8 +45,7 @@ class DBTable extends DataBase {
         try {
             $stmt = $this->pdo->prepare(sprintf("select * from %s where id = '%s'", $this->table, $id));
             $stmt->execute();
-            $data = $stmt->fetchAll();
-            $this->CloseLink();
+            $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             return $data;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
@@ -69,8 +68,8 @@ class DBTable extends DataBase {
                     sprintf("select * from %s order by %s %s limit %s offset %s", $this->table, $attr, $order, $limit, $offset
             ));
             $stmt->execute();
-            $data = $stmt->fetchAll();
-            $this->CloseLink();
+            $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            
             return $data;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
@@ -88,8 +87,8 @@ class DBTable extends DataBase {
         try {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
-            $data = $stmt->fetchAll();
-            $this->CloseLink();
+            $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            
             return $data;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
@@ -106,7 +105,7 @@ class DBTable extends DataBase {
     public function remove($id) {
         try {
             $stmt = $this->pdo->prepare(sprintf("delete from %s where id = '%s'", $this->table, $id));
-            $this->CloseLink();
+            
             if ($stmt->execute()) {
                 return true;
             } else {
@@ -134,7 +133,7 @@ class DBTable extends DataBase {
                     $sql .= sprintf(" id = '%s' ", $id[$i]);
             }
             $stmt = $this->pdo->prepare($sql);
-            $this->CloseLink();
+            
             if ($stmt->execute()) {
                 return true;
             } else {
@@ -165,7 +164,7 @@ class DBTable extends DataBase {
                 $i++;
             }
             $stmt = $this->pdo->prepare($sql);
-            $this->CloseLink();
+            
             if ($stmt->execute()) {
                 return true;
             } else {
@@ -237,10 +236,9 @@ class DBTable extends DataBase {
 
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
-            $data = $stmt->fetchAll();
-            $this->CloseLink();
+            $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             return $data;
-        } catch (\PDOException $ex) {
+        } catch (\PDOException $exc) {
             echo $exc->getMessage();
             echo '<br><pre>';
             echo $exc->getTraceAsString();
@@ -259,7 +257,7 @@ class DBTable extends DataBase {
             while ($row = $stmt->fetchObject("stdClass")) {
                 $data[] = $row;
             }
-            $this->CloseLink();
+            
             return $data;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
@@ -297,7 +295,6 @@ class DBTable extends DataBase {
             }
             $stmt = $this->pdo->prepare($sql_field . $sql_data);
             $stmt->execute();
-            $this->CloseLink();
             return true;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
@@ -329,7 +326,7 @@ class DBTable extends DataBase {
             }
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
-            $this->CloseLink();
+            
             return true;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
@@ -339,3 +336,4 @@ class DBTable extends DataBase {
     }
 
 }
+

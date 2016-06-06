@@ -9,11 +9,11 @@ class LoginController extends Controller {
     }
     
     public function CheckLogin() {
-        $user = $this->DB();
-        echo '<pre>';
-        var_dump($user->getTable("user")->findAll());
-        $request = $this->Request();
-        var_dump($request->request()->getAll());
+        $info = $this->Request()->request()->getAny(array("username","email","password"));
+        var_dump($info);
+        echo '<br><pre>';
+        $user = $this->DB()->getTable("user")->find(6);
+        var_dump($user);
     }
 
 }

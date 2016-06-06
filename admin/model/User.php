@@ -9,7 +9,10 @@ use lib\Base\DataBase;
  */
 class User extends Model{
     public $table = "user";
-    
+    public $username;
+    public $email;
+    public $password;
+
     public function __construct() {
         return new DataBase();
     }
