@@ -244,6 +244,74 @@ class DBTable extends DataBase {
             echo $exc->getTraceAsString();
         }
     }
+    
+    /**
+     * Finds array by a set of criteria.
+     *
+     * Optionally sorting and limiting details can be passed. An implementation may throw
+     * an UnexpectedValueException if certain values of the sorting or limiting details are
+     * not supported.
+     *
+     * @param array      $criteria array field data for query
+     * @param string     $order asc or desc orders
+     * @param string     $attr field for order
+     * @param int|null   $limit count data 
+     * @param int|null   $offset offset first result
+     *
+     * @return array The string.
+     *
+     * @throws \UnexpectedValueException
+     */
+    public function findByWhere(array $criteria, $attr = NULL, $order = NULL, $limit = NULL, $offset = NULL) {
+        try {
+            $key_field = array_keys($criteria);
+            $count_key = count($key_field);
+
+            $sql = "select * from " . $this->table . " where";
+            foreach ($key_field as $c => $key) {
+                if (is_array($criteria[$key])) {
+                    // count all this array
+                    $count = count($criteria[$key]);
+                    //find data in child array of type is array
+                    foreach ($criteria[$key] as $key2 => $val) {
+                        // check this is last key or not
+                        if ($key2 + 1 == $count && $c + 1 == $count_key) {
+                            $sql .= sprintf(" %s='%s' ", $key, $val);
+                        } else {
+                            $sql .= sprintf(" %s='%s' and ", $key, $val);
+                        }
+                    }
+                } else {
+                    // check this is last key or not
+                    if ($c + 1 != $count_key) {
+                        $sql .= sprintf(" %s='%s' or ", $key, $criteria[$key]);
+                    } else {
+                        $sql .= sprintf(" %s='%s'", $key, $criteria[$key]);
+                    }
+                }
+            }
+            if ($order != null && $attr != null) {
+                $sql .= " order by " . $attr . " " . $order;
+            }
+
+            if ($limit != null) {
+                $sql .=" limit " . $limit;
+            }
+
+            if ($offset != null) {
+                $sql .=" offset " . $offset;
+            }
+
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $data;
+        } catch (\PDOException $exc) {
+            echo $exc->getMessage();
+            echo '<br><pre>';
+            echo $exc->getTraceAsString();
+        }
+    }    
 
     /**
      * Find List Off Object Data

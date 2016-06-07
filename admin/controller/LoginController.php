@@ -12,7 +12,7 @@ class LoginController extends Controller {
         $info = $this->Request()->request()->getAny(array("username","email","password"));
         var_dump($info);
         echo '<br><pre>';
-        $user = $this->DB()->getTable("user")->find(6);
+        $user = $this->DB()->getTable("user")->findByWhere($info);
         var_dump($user);
     }
 
