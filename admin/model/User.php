@@ -12,6 +12,7 @@ class User extends Model{
     public $username;
     public $email;
     public $password;
+    public $salt;
 
     public function __construct() {
         return new DataBase();

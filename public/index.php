@@ -1,6 +1,5 @@
 <?php
 /* Set internal character encoding to UTF-8 */
-header('Content-Type: text/html; charset=utf-8');
 require_once __DIR__ . '/../app/autoload.php';
 require_once __DIR__.'/../admin/autoload.php';
 

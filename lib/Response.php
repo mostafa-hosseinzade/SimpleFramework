@@ -18,6 +18,7 @@ class Response {
     }
     
     public function __construct($data , $code=200) {
+        \header('Content-Type: text/html; charset=utf-8');
         \http_response_code($code);
         print $data;
         die();
@@ -27,13 +28,12 @@ class Response {
 class JsonResponse {
 
     public function __construct($response) {
-        \header("Content-Type: Application/json");
+        \header("Content-Type: Application/json;charset=utf-8");
         if(is_array($response))
             $response= \json_encode ($response);
         print $response;
         die();
     }
-
 }
 // if php version is old
 if (!function_exists('http_response_code')) {
