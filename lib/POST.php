@@ -73,6 +73,7 @@ class POST extends Request {
         $data = array();
         foreach ($keys as $value) {
             if(isset($this->POST[$value]))
+                if(!empty ($this->POST[$value]))
                 $data[$value] = $this->POST[$value];
         }
         return $data;

@@ -33,12 +33,13 @@ abstract class Controller {
     /**
      * Name Or Address In View File
      * @param NameFile $view
+     * @param string or array $data data you want send to page
      */
-    public function View($view) {
+    public function View($view,$data = null) {
         if (file_exists(__DIR__ . '/../view/' . $view)) {
             require_once __DIR__ . '/../view/' . $view;
         } else {
-            echo 'Cant Find Template';
+            echo 'Cant Find Template '.$view;
         }
     }
 
