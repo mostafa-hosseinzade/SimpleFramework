@@ -1,0 +1,30 @@
+<div  ng-show="EditContentCategoryInfo">
+
+    <form name="FormAddContentCategory" ng-submit="SendEdit()">
+	    <div class="modal-body">
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+		<label>عنوان</label>
+		<input type="text" ng-model="AddItem.title" name="title" required="true" ng-class="{invalid:FormAddContentCategory.title.$invalid}" placeholder="Title" class="form-control">
+		</div>
+
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+		<label>آدرس کوتاه</label>
+                <input type="text" placeholder="Slug" name="slug" required="true" ng-class="{invalid:FormAddContentCategory.slug.$invalid}" class="form-control" ng-model="AddItem.slug">
+		</div>
+
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+		<label>دسته بندی :</label>
+		<select ng-model="AddItem.active" name="active" required='true' ng-class="{invalid:FormAddContentCategory.active.$invalid}" class="form-control"> 
+		<option value="1" > فعال </option> 
+                <option value="0" > غیر فعال </option> 
+		</select>
+		</div>
+		<div class="clearfix"></div>
+	    </div>
+	    <div class="modal-footer">
+                <button class="btn btn-success" type="submit" ng-disabled="FormAddContentCategory.title.$invalid || FormAddContentCategory.active.$invalid || FormAddContentCategory.slug.$invalid">ثبت اطلاعات</button>
+		<button class="btn btn-danger" data-dismiss="modal">انصراف</button>
+	    </div>
+	    <div class="clearfix"></div>
+    </form>
+</div>

@@ -1,0 +1,85 @@
+
+
+<section class="sample" id="sample">
+    <p>&nbsp;</p>
+    <h1> نمونه کار ها</h1>
+
+    <!-- page content -->
+    <div class="" role="main">
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+            <div class="ViewGallery"  infinite-scroll="loadMore()" infinite-scroll-distance='1' infinite-scroll-disabled="{{busyScroll}}">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" ng-repeat="item in data.portfolio" style="margin-top: 5px">
+                        <div class="section" style="background-image:url({{ShowImg(item.id)}});background-size: 100% 100%; ">
+                            <div class="overlay">
+                                <a data-toggle="modal" data-target="#myModal" style="cursor: pointer">
+                                    <div class="link" >
+                                        <i class="fa fa-link fa-3x" ng-click="ShowPortfolio(item)" ></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="head">
+                                <p>{{item.title}}</p>
+
+                            </div>
+                            <div class="foot">
+                                <span >طراحی شده توسط گروه افق فردا</span>
+                                <span class="pull-left">{{item.percent}}%</span>
+                            </div>
+                        </div>
+                        <img src="/bundles/public/img/shadow3.png" style="width: 100%;position: absolute;right: 0;left: 0">
+                    </div>
+
+                </div>
+                <div class="col-lg-12 msg" style="margin-top: 10px;padding: 10px;">
+                    <h2>{{showMessage}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+    <div class="clearfix"></div>
+</section>
+
+<div class="modal fade ShowPortfolio" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    نمایش اطلاعات نمونه کار
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12">
+                    <img ng-src="{{ShowImg(PortfolioInfo.id)}}" height="400px" width="100%">
+                </div>
+                <div class="col-lg-12">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <h3><span>عنوان</span> : <span>{{PortfolioInfo.title}}</span></h3>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <h3><span>آدرس</span> : <span>{{PortfolioInfo.url}}</span></h3>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <h3><span>درصد پیشرفت</span> : <span>{{PortfolioInfo.percent}}٪</span></h3>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <h4><span>توضیحات</span> : <span >{{PortfolioInfo.content}}</span></h4>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">بستن
+                </button>
+            </div>
+        </div>  
+    </div> 
+</div>

@@ -1,15 +1,22 @@
-<html>
+<html ng-app="user">
     <head>
-        
+        <link rel="stylesheet" href="/bundles/public/css/bootstrap.rtl.css">
+        <link rel="stylesheet" href="/bundles/public/css/custom.css">
+        <link href="/bundles/public/fonts/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/bundles/public/css/loading-bar.css">
     </head>
     <body>
-        <form action="/madmin/Login/CheckLogin" method="post" style="text-align: center;margin-top: 40px">
-            <p>Login Form</p>
-            <input type="text" name="username" placeholder="User Name"><br>
-            <input type="text" name="email" placeholder="Email"><br/>
-            <input type="text" name="password" placeholder="Password"><br>
-            <input type="hidden" name="csrf" value="<?php echo csrf; ?>">
-            <input type="submit" >
-        </form>
+        <div ng-view></div>
+        <script>
+        var csrf = "<?php echo csrf; ?>";
+        </script>
+        <script src="/bundles/public/angular/jquery.js"></script>
+        <script src="/bundles/admin/js/angular.min.js"></script>
+        <script src="/bundles/public/js/angular-route.min.js"></script>
+        <script src="/bundles/public/js/angular-animate.min.js"></script>
+        <script src="/bundles/public/js/angular/angular-resource.min.js"></script>
+        <script src="/bundles/public/js/loading-bar.js"></script> 
+        <script src="/bundles/public/js/bootstrap.min.js"></script>
+        <script src="/bundles/login/js/controller.js"></script>
     </body>
 </html>

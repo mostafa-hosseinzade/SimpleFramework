@@ -1,0 +1,59 @@
+<div class="header">
+    <h3 class="pull-right">محتوا</h3>
+    <p class="pull-left" style="margin-top: 5px">
+        <button class="btn btn-success" ng-click="prepareCreate()">افزودن <span class="glyphicon glyphicon-ok"></span></button>
+        <button class="btn btn-primary" ng-disabled="!Selected" ng-click="prepareEdit()">ویرایش  <span class="glyphicon glyphicon-edit"></span></button>
+        <button class="btn btn-danger" ng-disabled="!Selected" ng-click="prepareDelete()">حذف <span class="glyphicon glyphicon-remove"></span></button>
+    </p>
+    <div class="clearfix"></div>
+</div>
+<br>
+<div class="content">
+    <table class="table table-bordered">
+        <thead>
+        <th>ردیف</th>
+        <th>عنوان</th>
+        <th>محتوا</th>
+        <th>تعداد بازدید</th>
+        <th>اولویت</th>
+        <th>دسته بندی</th>
+        <th>آخرین تغییرات</th>
+        <th>تاریخ ثبت</th>
+        </thead>
+        <tbody>
+            <tr ng-click="SelectedItems(entity)" ng-dblclick="Show()" ng-class="{SelectedItem:entity.id == Selected.id}" ng-repeat="entity in data">
+                <td>{{$index}}</td>
+                <td>{{entity.title}}</td>
+                <td>{{entity.content}}</td>
+                <td>{{entity.visit}}</td>
+                <td>{{entity.orderList}}</td>
+                <td>{{entity.ctg}}</td>
+                <td>{{entity.updatedAt}}</td>
+                <td>{{entity.createdAt}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+        <th>ردیف</th>
+        <th>عنوان</th>
+        <th>محتوا</th>
+        <th>تعداد بازدید</th>
+        <th>اولویت</th>
+        <th>دسته بندی</th>
+        <th>آخرین تغییرات</th>
+        <th>تاریخ ثبت</th>           
+        </tfoot>
+    </table>
+</div>
+
+<div class="modal fade ModalShowContent">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="Close " data-dismiss="modal">Close</button>
+            </div>
+            <showcontent></showcontent>
+            <addcontent></addcontent>    
+            <editcontent></editcontent>
+        </div>
+    </div>
+</div>

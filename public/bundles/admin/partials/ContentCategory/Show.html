@@ -1,0 +1,28 @@
+<div  ng-show="ShowContentCategoryInfo">
+    <div class="modal-body">
+		<div class="show col-lg-6 col-md-6 col-xs-12 col-sm-12"> 
+		عنوان : {{Selected.title}}
+		</div>
+		<div class="show col-lg-6 col-md-6 col-xs-12 col-sm-12"> 
+		 آدرس کوتاه : {{Selected.slug}}
+		</div>
+		<div class="verydata col-lg-12 col-md-12 col-xs-12 col-sm-12"> 
+		وضعیت : 
+                <span ng-show="Selected.active == 1"> فعال</span>
+                <span ng-show="Selected.active == 0"> غیر فعال</span>
+		</div>
+
+		
+		<div class="show col-lg-6 col-md-6 col-xs-12 col-sm-12"> 
+		تاریخ ایجاد : {{Selected.createdAt}}
+		</div>
+		<div class="show col-lg-6 col-md-6 col-xs-12 col-sm-12"> 
+		آخرین تغییرات : {{Selected.updatedAt}}
+		</div>		
+		<div class="clearfix"></div>
+    </div>
+    <div class="modal-footer">
+        <button ng-click="prepareEdit()" class="btn btn-success pull-left">ویرایش</button>
+    </div>
+    <div class="clearfix"></div>
+</div>

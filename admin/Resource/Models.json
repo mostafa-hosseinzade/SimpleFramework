@@ -1,0 +1,457 @@
+{
+    "content": {
+        "label": "Content",
+        "table": "content",
+        "field": ["id", "title", "content", "ctg_id", "user_id", "visit", "order_list", "created_at", "updated_at"],
+        "show": {
+            "title": {
+                "label": "عنوان",
+                "name": "title"
+            },
+            "contnet": {
+                "label": "محتوا",
+                "name": "content"
+            },
+            "order_list": "مرتب سازی بر اساس",
+            "crg_id": "دسته بندی"
+        },
+        "form": {
+            "title": {
+                "type": "string",
+                "label": "Title",
+                "name": "title",
+                "required": true
+            },
+            "order_list": {
+                "type": "number",
+                "label": "order_list",
+                "name": "order_list"
+            },
+            "ctg_id": {
+                "type": "entity",
+                "target": "contentcategory",
+                "label": "Category",
+                "name": "ctg_id",
+                "required": true
+            },
+            "content": {
+                "type": "text",
+                "label": "Content",
+                "name": "content",
+                "required": true
+            },"file": {
+                "type": "file",
+                "label": "file",
+                "name": "file"
+            }
+        },
+        "add": ["ctg_id", "title", "content", "order_list","file"],
+        "edit": ["id", "ctg_id", "title", "content", "order_list","file"],
+        "action": {
+            "show": true,
+            "add": true,
+            "edit": true,
+            "delete": true,
+            "search": true
+        },
+        "table_show": {
+            "th": ["index", "Title", "Content", "Visit", "OrderList", "Category", "Update", "Create","Image"],
+            "td": ["title", "content", "visit",
+                "order_list", "ctg_id"
+                        , "updated_at", "created_at","file"]
+        },
+        "info": {
+            "main": "content",
+            "rel": "contentcategory",
+            "field": "ctg_id",
+            "count": "count"
+        }
+    },
+    "contentcategory": {
+        "label": "Content Category",
+        "table": "contentcategory",
+        "field": ["id", "title", "active", "slug", "created_at", "updated_at", "subctg"],
+        "show": {
+            "title": {
+                "label": "عنوان",
+                "name": "title"
+            },
+            "slug": {
+                "label": "توضیح کوتاه",
+                "name": "content"
+            },
+            "order_list": "وضعیت",
+            "created_at": "تاریخ ایجاد"
+        },
+        "form": {
+            "title": {
+                "type": "string",
+                "label": "Title",
+                "name": "title",
+                "required": true
+            },
+            "slug": {
+                "type": "string",
+                "label": "Slug",
+                "name": "slug",
+                "required": true
+            },
+            "active": {
+                "type": "boolean",
+                "label": "Active",
+                "name": "active",
+                "required": true
+            },
+            "subctg": {
+                "type": "entity",
+                "target": "contentcategory",
+                "label": "Sub Category",
+                "name": "subctg",
+                "required": false
+            }
+        },
+        "add": ["title", "active", "slug", "subctg"],
+        "edit": ["id", "active", "title", "slug", "subctg"],
+        "action": {
+            "show": true,
+            "add": true,
+            "edit": true,
+            "delete": true,
+            "search": true
+        },
+        "table_show": {
+            "th": ["index", "Title", "Slug", "Active", "Update", "Create", "SubCtg"],
+            "td": ["title", "slug", "active", "updated_at", "created_at", "subctg"]
+        },
+        "info": {
+            "main": "contentcategory",
+            "rel": "contentcategory",
+            "field": "subctg",
+            "count": "count"
+        }
+    },
+    "Portfolio": {
+        "label": "Portfolio",
+        "table": "Portfolio",
+        "field": ["id", "title", "content", "slug", "url", "percent", "user_id", "created_at", "updated_at"],
+        "show": {
+            "title": {
+                "label": "عنوان",
+                "name": "title"
+            },
+            "content": {
+                "label": "توضیحات",
+                "name": "content"
+            },
+            "percent": {
+                "label": "درصد پیشرفت کار",
+                "name": "percent"
+            }
+        },
+        "form": {
+            "title": {
+                "type": "string",
+                "label": "Title",
+                "name": "title",
+                "required": true
+            },
+            "percent": {
+                "type": "number",
+                "label": "Percent",
+                "name": "percent"
+            },
+            "slug": {
+                "type": "string",
+                "label": "Slug",
+                "name": "slug",
+                "required": true
+            },
+            "url": {
+                "type": "string",
+                "label": "URL",
+                "name": "url",
+                "required": false
+            },
+            "content": {
+                "type": "text",
+                "label": "Content",
+                "name": "content",
+                "required": false
+            }
+        },
+        "add": ["url", "slug", "title", "content", "percent"],
+        "edit": ["id", "url", "slug", "title", "content", "percent"],
+        "action": {
+            "show": true,
+            "add": true,
+            "edit": true,
+            "delete": true,
+            "search": true
+        },
+        "table_show": {
+            "th": ["index", "Title", "Content", "Percent", "Slug", "Url", "Update", "Create"],
+            "td": ["title", "content", "percent",
+                "slug", "url"
+                        , "updated_at", "created_at"]
+        },
+        "info": {
+            "main": "content",
+            "count": "count"
+        }
+    },
+    "PortfolioImg": {
+        "label": "PortfolioImg",
+        "table": "PortfolioImg",
+        "field": ["id", "content", "file", "portfolio_id", "created_at", "updated_at"],
+        "show": {
+            "content": {
+                "label": "توضیحات",
+                "name": "content"
+            },
+            "file": {
+                "label": "عکس",
+                "name": "file"
+            }
+        },
+        "form": {
+            "file": {
+                "type": "file",
+                "label": "file",
+                "name": "file"
+            },
+            "portfolio_id": {
+                "type": "entity",
+                "target": "Portfolio",
+                "label": "Portfolio Id",
+                "name": "portfolio_id",
+                "required": true
+            },
+            "content": {
+                "type": "text",
+                "label": "Content",
+                "name": "content",
+                "required": false
+            }
+        },
+        "add": ["file", "content", "portfolio_id"],
+        "edit": ["id", "file", "content", "portfolio_id"],
+        "action": {
+            "show": true,
+            "add": true,
+            "edit": true,
+            "delete": true,
+            "search": true
+        },
+        "table_show": {
+            "th": ["index", "File", "Content", "Portfolio", "Update", "Create"],
+            "td": ["file", "content", "portfolio_id"
+                        , "updated_at", "created_at"]
+        },
+        "info": {
+            "main": "PortfolioImg",
+            "rel": "Portfolio",
+            "field": "portfolio_id",
+            "count": "count"
+        }
+    },
+    "Services": {
+        "label": "Services",
+        "table": "Services",
+        "field": ["id", "title", "content", "slug", "meta", "price", "user_id", "created_at", "updated_at"],
+        "show": {
+            "title": {
+                "label": "عنوان",
+                "name": "title"
+            },
+            "content": {
+                "label": "توضیحات",
+                "name": "content"
+            },
+            "price": {
+                "label": "قیمت",
+                "price": "price"
+            },
+            "meta": {
+                "label": "بر چسب ها",
+                "price": "meta"
+            },
+            "price": {
+                "label": "نمایش آدرس",
+                "price": "slug"
+            }
+        },
+        "form": {
+            "title": {
+                "type": "string",
+                "label": "Title",
+                "name": "title",
+                "required": true
+            },
+            "price": {
+                "type": "number",
+                "label": "Price",
+                "name": "price"
+            },
+            "slug": {
+                "type": "string",
+                "label": "Slug",
+                "name": "slug",
+                "required": true
+            },
+            "meta": {
+                "type": "string",
+                "label": "META",
+                "name": "meta",
+                "required": false
+            },
+            "content": {
+                "type": "text",
+                "label": "Content",
+                "name": "content",
+                "required": false
+            }
+        },
+        "add": ["meta", "slug", "title", "content", "price"],
+        "edit": ["id", "meta", "slug", "title", "content", "price"],
+        "action": {
+            "show": true,
+            "add": true,
+            "edit": true,
+            "delete": true,
+            "search": true
+        },
+        "table_show": {
+            "th": ["index", "Title", "Content", "Price", "Slug", "Meta", "Update", "Create"],
+            "td": ["title", "content", "price",
+                "slug", "meta"
+                        , "updated_at", "created_at"]
+        },
+        "info": {
+            "main": "Services",
+            "count": "count"
+        }
+    },
+    "FactorField": {
+        "label": "FactorField",
+        "table": "FactorField",
+        "field": ["id", "title", "content", "FactorSection_id", "user_id", "price", "order_list", "created_at", "updated_at"],
+        "show": {
+            "title": {
+                "label": "عنوان",
+                "name": "title"
+            },
+            "contnet": {
+                "label": "محتوا",
+                "name": "content"
+            },
+            "order_list": "مرتب سازی بر اساس",
+            "crg_id": "دسته بندی"
+        },
+        "form": {
+            "title": {
+                "type": "string",
+                "label": "Title",
+                "name": "title",
+                "required": true
+            },
+            "order_list": {
+                "type": "number",
+                "label": "order_list",
+                "name": "order_list"
+            },
+            "FactorSection_id": {
+                "type": "entity",
+                "target": "FactorSection",
+                "label": "FactorSection",
+                "name": "FactorSection_id",
+                "required": true
+            },
+            "content": {
+                "type": "text",
+                "label": "Content",
+                "name": "content",
+                "required": true
+            },
+            "price": {
+                "type": "number",
+                "label": "Price",
+                "name": "price"
+            }
+        },
+        "add": ["FactorSection_id", "title", "content", "order_list", "price"],
+        "edit": ["id", "FactorSection_id", "title", "content", "order_list", "price"],
+        "action": {
+            "show": true,
+            "add": true,
+            "edit": true,
+            "delete": true,
+            "search": true
+        },
+        "table_show": {
+            "th": ["index", "Title", "Content", "Price", "OrderList", "FactorSection", "Update", "Create"],
+            "td": ["title", "content", "price",
+                "order_list", "FactorSection_id"
+                        , "updated_at", "created_at"]
+        },
+        "info": {
+            "main": "FactorField",
+            "rel": "FactorSection",
+            "field": "FactorSection_id",
+            "count": "count"
+        }
+    },
+    "FactorSection": {
+        "label": "Factor Section",
+        "table": "FactorSection",
+        "field": ["id", "title", "content", "order_list", "created_at", "updated_at"],
+        "show": {
+            "title": {
+                "label": "عنوان",
+                "name": "title"
+            },
+            "slug": {
+                "label": "توضیح کوتاه",
+                "name": "content"
+            },
+            "order_list": "وضعیت",
+            "created_at": "تاریخ ایجاد"
+        },
+        "form": {
+            "title": {
+                "type": "string",
+                "label": "Title",
+                "name": "title",
+                "required": true
+            },
+            "content": {
+                "type": "text",
+                "label": "Content",
+                "name": "content",
+                "required": true
+            },
+            "order_list": {
+                "type": "number",
+                "label": "Order List",
+                "name": "order_list",
+                "required": true
+            }
+        },
+        "add": ["title", "content", "order_list"],
+        "edit": ["id", "title", "content", "order_list"],
+        "action": {
+            "show": true,
+            "add": true,
+            "edit": true,
+            "delete": true,
+            "search": true
+        },
+        "table_show": {
+            "th": ["index", "Title", "Content", "Order List", "Update", "Create"],
+            "td": ["title", "content", "order_list", "updated_at", "created_at"]
+        },
+        "info": {
+            "main": "FactorSection",
+            "count": "count"
+        }
+    }
+}

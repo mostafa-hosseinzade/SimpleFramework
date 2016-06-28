@@ -61,5 +61,24 @@ class DataBase {
     public function getTable($table) {
         return new DBTable($table);
     }
+    
+     /**
+     * This Function for Speciale Query
+     * @param string $sql
+     * @return array
+     */
+    public function query($sql) {
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            
+            return $data;
+        } catch (\PDOException $exc) {
+            echo $exc->getMessage();
+            echo '<br><pre>';
+            echo $exc->getTraceAsString();
+        }
+    }
 
 }

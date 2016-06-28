@@ -9,7 +9,7 @@ namespace lib;
  */
 class Response {
     
-    public function redirect($url) {
+    public static function redirect($url) {
         $this->setHeader($url);
     }
     

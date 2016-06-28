@@ -1,0 +1,34 @@
+<div  ng-show="AddContentInfo">
+
+    <form name="FormAddContent" ng-submit="SendAdd()">
+	    <div class="modal-body">
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+		<label>عنوان</label>
+		<input type="text" ng-model="AddItem.title" name="title" required="true" ng-class="{invalid:FormAddContent.title.$invalid}" placeholder="Title" class="form-control">
+		</div>
+
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+		<label>اولویت</label>
+		<input type="number" class="form-control" ng-model="AddItem.order_list">
+		</div>
+
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+		<label>دسته بندی :</label>
+		<select ng-model="AddItem.ctg_id" name="ctg_id" required='true' ng-class="{invalid:FormAddContent.ctg_id.$invalid}" class="form-control"> 
+		<option value="{{val.id}}" ng-repeat="val in ctg"> {{val.title}} </option> 
+		</select>
+		</div>
+
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<label>محتوا :</label>
+                <inputtext></inputtext>
+		</div>
+		<div class="clearfix"></div>
+	    </div>
+	    <div class="modal-footer">
+                <button class="btn btn-success" type="submit" ng-disabled="FormAddContent.title.$invalid || FormAddContent.ctg_id.$invalid || FormAddContent.content.$invalid">ثبت اطلاعات</button>
+		<button class="btn btn-danger" data-dismiss="modal">انصراف</button>
+	    </div>
+	    <div class="clearfix"></div>
+    </form>
+</div>

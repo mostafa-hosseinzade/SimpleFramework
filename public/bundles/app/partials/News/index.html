@@ -1,0 +1,77 @@
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
+            <hr style="border : solid 3px;margin-top: 42px;"/>
+        </div>
+        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <h1 style="text-align: right"> اخبار سایت</h1>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left">
+                    <input type="text" ng-model="inputsearch" class="form-control" ng-keyup="search()" placeholder="جستجو" style="margin-top: 32px;color: #8D9DAE;border-color: #768A9E;font-weight: bold;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="col-lg-12">
+    <div class="ViewGallery"  infinite-scroll="loadMore()" infinite-scroll-distance='1' infinite-scroll-disabled="{{busyScroll}}">
+        <div class="some-applications">
+            <div class="cap"><h3> اخبار سایت</h3></div>
+            <div class="container-fluid">
+                <div class="col-lg-12">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" ng-repeat="item in news">
+                        <div class="news-item">
+                            <h3 > {{item.title}} <small style="color: white">{{item.created_at}}</small></h3>
+                            <h4>{{item.content| htmlToPlaintext| cut:true:30:'...'}}</h4>
+                            <a style="cursor: pointer" ng-click="ShowNews(item)" class="btn-news-more pull-left">اطلاعات بیشتر</a>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 msg" style="margin-top: 10px;padding: 10px;">
+                    <h2>{{showMessage}}</h2>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="modal fade ShowNews" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    نمایش اخبار
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <h3><span>عنوان</span> : <span>{{NewsInfo.title}}</span></h3>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <h3><span>تعداد نمایش</span> : <span>{{NewsInfo.visit}}</span></h3>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <h4><span>توضیحات</span> : <span >{{NewsInfo.content| htmlToPlaintext}}</span></h4>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">بستن
+                </button>
+            </div>
+        </div>  
+    </div> 
+</div>

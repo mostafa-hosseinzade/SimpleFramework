@@ -15,12 +15,13 @@ abstract class Controller {
     private $url;
     public function __construct($param) {
         if ($param[1] == "mAdmin") {
-            if (isset($param[2])) {
-                if (method_exists($this, $param[2])) {
-                    $method = $param[2];
+            if (isset($param[3])) {
+                if (method_exists($this, $param[3])) {
+                    $method = $param[3];
                     unset($param[0]);
                     unset($param[1]);
                     unset($param[2]);
+                    unset($param[3]);
                     call_user_method_array($method, $this, $param);
                 } else {
                     return $this->View('error/404.php');
@@ -52,13 +53,12 @@ abstract class Controller {
     /**
      * Name Or Address In View File
      * @param NameFile $view
-     * @param string or array $data data you want send to page
      */
-    public function View($view,$data = null) {
+    public function View($view) {
         if (file_exists(__DIR__ . '/../view/' . $view)) {
             require_once __DIR__ . '/../view/' . $view;
         } else {
-            echo 'Cant Find Template '.$view;
+            echo 'Cant Find Template';
         }
     }
 
@@ -92,8 +92,8 @@ abstract class Controller {
      * @param string $url
      */
     public function redirect($url) {
-        $response = new Response();
-        $response->redirect($url);
+        $dispatcher = new \lib\Dispatcher();
+        $dispatcher->redirect($url);
     }
 
     /**

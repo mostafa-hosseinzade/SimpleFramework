@@ -1,0 +1,58 @@
+    <services-app></services-app>
+
+    <it-app></it-app>
+
+    <sample-app></sample-app>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('[id="h_why"]').click(function (e) {
+        e.preventDefault();
+        $('html, body').stop().animate({
+            scrollTop: $('#why').offset().top - 54
+        }, 1200);
+    });
+
+    $('[id="h_service"]').click(function (e) {
+        e.preventDefault();
+        $('html, body').stop().animate({
+            scrollTop: $('#service').offset().top - 85
+        }, 1200);
+    });
+
+    $('[id="h_it"]').click(function (e) {
+        e.preventDefault();
+        $('html, body').stop().animate({
+            scrollTop: $('#it').offset().top - 95
+        }, 1200);
+    });
+
+    $('[id="h_sample"]').click(function (e) {
+        e.preventDefault();
+        $('html, body').stop().animate({
+            scrollTop: $('#sample').offset().top + 250
+        }, 1200);
+    });
+
+    $('[id="h_list"]').click(function (e) {
+        e.preventDefault();
+        $('html, body').stop().animate({
+            scrollTop: $('#list').offset().top - 95
+        }, 1200);
+    });
+
+    $('[id="h_about"]').click(function (e) {
+        e.preventDefault();
+        $('html, body').stop().animate({
+            scrollTop: $('#about').offset().top - 100
+        }, 1200);
+    });
+
+    $('#test3').click(function (e) {
+        e.preventDefault();
+        $('html, body').stop().animate({
+            scrollTop: $('#test2').offset().top + 650
+        }, 1200);
+    });        
+    });
+
+</script>

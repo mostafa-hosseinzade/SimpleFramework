@@ -1,0 +1,97 @@
+<div class="col-lg-12 footer" >
+    <nav class="">
+        <p>&nbsp;</p>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+            <form name="ContactForm" ng-click="disable = true" >
+                <h4>ارتباط با ما</h4>
+                <input type="text" ng-model="contact.name" name="name" required="true" ng-class="{ErrorInput:ContactForm.name.$invalid && disable}" class="form-control input-special" placeholder="نام">
+                <input type="text" ng-model="contact.mobile" required="true" name="mobile" ng-class="{ErrorInput:ContactForm.mobile.$invalid && disable}" class="form-control input-special" placeholder="شماره موبایل">
+                <input type="email" ng-model="contact.email" required="true" name="email" ng-class="{ErrorInput:ContactForm.email.$invalid && disable}" class="form-control input-special" placeholder="آدرس ایمیل">
+                <textarea cols="3" ng-model="contact.message" required="true" name="message" ng-class="{ErrorInput:ContactForm.message.$invalid && disable}" rows="4" class="form-control input-special" placeholder="پیام"></textarea>
+                <input type="button" ng-click="SendContact()" ng-disabled="(ContactForm.name.$invalid ||
+                                    ContactForm.mobile.$invalid ||
+                                    ContactForm.email.$invalid ||
+                                    ContactForm.message.$invalid || DisableBtn) && disable" class="btn btn-primary form-control input-special" value="ارسال اطلاعات">
+            </form>
+            <div class="modal fade MessageModal" >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button data-dismiss="modal" class="Close" aria-hidden="true">&times;</button>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="modal-body">
+                            {{modalmsg}}
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-success" >بستن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <p><b>شماره های تماس</b></p>
+            <p>09373298343 - 09118475471</p>
+            <p><b>تمامی حقوق این سایت محفوظ و متعلق به گروه طراحی سایت افق فردا می باشد</b></p>
+            <p>طبق ماده 12 فصل سوم قانون جرائم رایانه هرگونه کپی برداری ممنوع بوده و پیگرد قانونی دارد .</p>
+            <p>&nbsp;</p>
+            <h4>با ما در ارتباط باشید !!!</h4>
+            <hr style="height: 5px">
+            <a href="#" rel="nofollow" ><img src="bundles/public/img/social/Aparat-icon.png"></a>
+            <a href="#" rel="nofollow"><img src="bundles/public/img/social/Google-plus-icon.png"></a>
+            <a href="#" rel="nofollow"><img src="bundles/public/img/social/Email-icon.png"></a>
+            <a href="#" rel="nofollow"><img src="bundles/public/img/social/Facebook-icon.png"></a>
+            <a href="#" rel="nofollow"><img src="bundles/public/img/social/Instagram-icon.png"></a>
+            <a href="#" rel="nofollow"><img src="bundles/public/img/social/Twitter-icon.png"></a>
+        </div>
+
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="background-image: url(/bundles/public/img/head_1.jpg);background-size: 100% 100%;min-height: 400px;color: white">
+            <div style="background-color: black;opacity: 0.5;position: absolute;top: 0px;right: 0px;left: 0px;bottom: 0px;"></div>
+            <div class="comment-footer">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item active-footer">
+                    <div class="news-item">
+                        <h3 > آقای محسن احمدی<small style="color: white">(سایت گل آرایی)</small></h3>
+                        <h4>ممنون بابت خدمات خوب و عالی سایت افق</h4>
+                        <a style="cursor: pointer" class="btn-news-more pull-left">تماس بگیرید</a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item">
+                    <div class="news-item">
+                        <h3 >1 آقای محسن احمدی<small style="color: white">(سایت گل آرایی)</small></h3>
+                        <h4>ممنون بابت خدمات خوب و عالی سایت افق</h4>
+                        <a style="cursor: pointer" class="btn-news-more pull-left">تماس بگیرید</a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item">
+                    <div class="news-item">
+                        <h3 > 2 آقای محسن احمدی<small style="color: white">(سایت گل آرایی)</small></h3>
+                        <h4>ممنون بابت خدمات خوب و عالی سایت افق</h4>
+                        <a style="cursor: pointer" class="btn-news-more pull-left">تماس بگیرید</a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item">
+                    <div class="news-item">
+                        <h3 > 3 آقای محسن احمدی<small style="color: white">(سایت گل آرایی)</small></h3>
+                        <h4>ممنون بابت خدمات خوب و عالی سایت افق</h4>
+                        <a style="cursor: pointer" class="btn-news-more pull-left">تماس بگیرید</a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        function test(){
+          var item = $('.comment-footer').children(".active-footer");
+           item.removeClass("active-footer"); 
+           item.next().addClass("active-footer");  
+        }
+    });
+</script>

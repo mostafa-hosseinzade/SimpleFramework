@@ -1,0 +1,39 @@
+<section class="sample" id="sample">
+    <p>&nbsp;</p>
+    <h1>چند نمونه کار</h1>
+
+    <!-- page content -->
+    <div class="" role="main">
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"  ng-repeat="item in data.portfolio">
+                    <div class="section"  style="background-image:url({{ShowImg(item.id)}});background-size: 100% 100%; ">
+                        <div class="overlay">
+                            <a data-toggle="modal" data-target="#myModal" style="cursor: pointer">
+                                <div class="link" >
+                                    <i class="fa fa-link fa-3x"  ng-click="ShowPortfolio(item)" ></i>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="head">
+                            <p >{{item.title}}</p>
+
+                        </div>
+                        <div class="foot">
+                            <span >طراحی شده توسط گروه افق فردا</span>
+                            <span class="pull-left">{{item.percent}}%</span>
+                        </div>
+                    </div>
+                    <img src="/bundles/public/img/shadow3.png" style="width: 100%;position: absolute;right: 0;left: 0">
+                </div>
+                <div class="col-lg-12 " style="padding: 10px;text-align: center">
+                    <a href="#/Portfolio" class="btn btn-info btn-lg" style="margin-top: 10px">مشاهده همه ی نمونه کارها</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+    <!-- /page content -->
+</section>

@@ -27,7 +27,7 @@ class DBTable extends DataBase {
             $stmt = $this->pdo->prepare("select * from " . $this->table);
             $stmt->execute();
             $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-            
+
             return $data;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
@@ -69,7 +69,7 @@ class DBTable extends DataBase {
             ));
             $stmt->execute();
             $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-            
+
             return $data;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
@@ -88,7 +88,7 @@ class DBTable extends DataBase {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
             $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-            
+
             return $data;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
@@ -105,7 +105,7 @@ class DBTable extends DataBase {
     public function remove($id) {
         try {
             $stmt = $this->pdo->prepare(sprintf("delete from %s where id = '%s'", $this->table, $id));
-            
+
             if ($stmt->execute()) {
                 return true;
             } else {
@@ -133,7 +133,7 @@ class DBTable extends DataBase {
                     $sql .= sprintf(" id = '%s' ", $id[$i]);
             }
             $stmt = $this->pdo->prepare($sql);
-            
+
             if ($stmt->execute()) {
                 return true;
             } else {
@@ -164,7 +164,7 @@ class DBTable extends DataBase {
                 $i++;
             }
             $stmt = $this->pdo->prepare($sql);
-            
+
             if ($stmt->execute()) {
                 return true;
             } else {
@@ -244,7 +244,7 @@ class DBTable extends DataBase {
             echo $exc->getTraceAsString();
         }
     }
-    
+
     /**
      * Finds array by a set of criteria.
      *
@@ -284,7 +284,7 @@ class DBTable extends DataBase {
                 } else {
                     // check this is last key or not
                     if ($c + 1 != $count_key) {
-                        $sql .= sprintf(" %s='%s' or ", $key, $criteria[$key]);
+                        $sql .= sprintf(" %s='%s' and ", $key, $criteria[$key]);
                     } else {
                         $sql .= sprintf(" %s='%s'", $key, $criteria[$key]);
                     }
@@ -311,7 +311,7 @@ class DBTable extends DataBase {
             echo '<br><pre>';
             echo $exc->getTraceAsString();
         }
-    }    
+    }
 
     /**
      * Find List Off Object Data
@@ -325,7 +325,7 @@ class DBTable extends DataBase {
             while ($row = $stmt->fetchObject("stdClass")) {
                 $data[] = $row;
             }
-            
+
             return $data;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
@@ -383,19 +383,51 @@ class DBTable extends DataBase {
             $count_field = count($data);
             $i = 1;
             foreach ($data as $key => $value) {
-                if ($key != "id") {
-                    if ($i == $count_field) {
-                        $sql .=sprintf(" %s ='%s' where id='%s'", $key, $value, $data['id']);
-                    } else {
+
+                if ($i == $count_field) {
+                    $sql .=sprintf(" %s ='%s' where id='%s'", $key, $value, $data['id']);
+                } else {
+                    if ($key != "id") {
                         $sql .=sprintf(" %s ='%s' ,", $key, $value);
                     }
                 }
                 $i++;
             }
+
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
-            
+
             return true;
+        } catch (\PDOException $exc) {
+            echo $exc->getMessage();
+            echo '<br><pre>';
+            echo $exc->getTraceAsString();
+        }
+    }
+    
+    /**
+     * search the value
+     * @param array $field
+     * @param string $value
+     * @return array
+     */
+    public function search(array $field, $value,$id) {
+        try {
+            $sql = "select * from " . $this->table . " where ";
+            $count_field = count($field);
+            $i = 1;
+            foreach ($field as  $name) {
+                if ($i == $count_field) {
+                    $sql .=sprintf(" `%s` like '%s' and ctg_id = '%s'", $name, "%".$value."%",$id);
+                } else {
+                        $sql .=sprintf(" `%s` like '%s' or", $name, "%".$value."%");
+                }
+                $i++;
+            }
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
             echo '<br><pre>';
@@ -404,4 +436,3 @@ class DBTable extends DataBase {
     }
 
 }
-

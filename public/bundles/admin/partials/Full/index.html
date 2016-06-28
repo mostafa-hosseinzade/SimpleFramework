@@ -1,0 +1,111 @@
+<div class="header">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><h3 class="pull-right">{{entities.label}}</h3></div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-show="entities.action.search == true" style="padding-top: 10px;">
+        <input type="text" ng-keyup="Search()" ng-model="inputsearch" placeholder="Search" class="form-control">
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left"><p class="pull-left" style="padding-top: 10px">
+            <button class="btn btn-success" ng-show="entities.action.add == true" ng-click="prepareCreate()">افزودن <span class="glyphicon glyphicon-ok"></span></button>
+            <button class="btn btn-primary" ng-show="entities.action.edit == true" ng-disabled="!Selected" ng-click="prepareEdit()">ویرایش  <span class="glyphicon glyphicon-edit"></span></button>
+            <button class="btn btn-danger" ng-show="entities.action.delete == true" ng-disabled="!Selected" ng-click="prepareDelete()">حذف <span class="glyphicon glyphicon-remove"></span></button>
+        </p>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<br>
+<div class="content">
+    <table class="table table-bordered">
+        <thead>
+        <th ng-repeat="thead in th">{{thead}}</th>
+        </thead>
+        <tbody>
+            <tr   ng-click="SelectedItems(entity)" ng-dblclick="Show()" ng-class="{SelectedItem:entity.id == Selected.id}" ng-repeat="entity in data" class="tr{{entity.id}}">
+                <td>{{$index}}</td>
+                <td ng-repeat="tid in td">
+                    <span ng-if="tid != 'file' && tid != info.field && tid != 'content'">{{entity[tid]}}</span>
+                    <span ng-if="tid != 'file' && tid != info.field && tid == 'content'">{{entity[tid]| htmlToPlaintext | cut :true:25:'...' }}</span>
+                    <span ng-if="tid == 'file'"><img ng-src="{{entity[tid]}}" width="200px" height="150px"></span>
+                    <span ng-if="info.rel != undefined && tid == info.field">{{ShowCtg(entity[tid])}}</span>
+                </td>
+            </tr>            
+        </tbody>
+        <tfoot>
+        <th ng-repeat="thead in th">{{thead}}</th>
+        </tfoot>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col-lg-2 col-md-2 hidden-sm-down" style="line-height: 74px">تعداد کل رکوردها : {{count}}</div>
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <nav style="text-align: center;" class="btnTooltip" data-placement="auto" title="صفحه بندی" >
+            <ul class="pagination pagination-sm">
+                <li class="page-item">
+                    <a class="page-link"  aria-label="Previous" href="{{'#/' + entity + '/' +
+                                filter + '/' +
+                                constPageItems + '/' +
+                                field + '/' + order +
+                                '/' + before()}}"  ng-show="current != 1">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item" ng-repeat="result in Allpaginate" class="paginate"  ng-class="{active:result == current}" >
+                    <span ng-show="!result">...</span> 
+                    <a class="page-link"  ng-show="result" style="cursor: pointer;" href="{{'#/' + entity + '/' +
+                                    filter + '/' +
+                                    constPageItems + '/' +
+                                    field + '/' + order +
+                                    '/' + setOffset($index)}}" >{{result}}</a> 
+                </li>
+                <li class="page-item">
+                    <a class="page-link"   aria-label="Next" href="{{'#/' + entity + '/' +
+                                filter + '/' +
+                                constPageItems + '/' +
+                                field + '/' + order +
+                                '/' + next()}}" ng-show="allPage > current">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col-lg-2 col-md-2 hidden-sm-down" style="line-height: 74px;padding-top: 15px">
+        <select ng-model="constPageItems" ng-change="numberShowChange()" class="form-control">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+    </div>
+</div>
+<div class="modal fade ModalShowContent">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="Close " data-dismiss="modal">Close</button>
+            </div>
+            <show></show>
+            <add></add>    
+            <edit></edit>
+        </div>
+    </div>
+</div>
+<div class="modal fade ModalDeleteContent">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="Close pull-left" data-dismiss="modal" aria_label="true">Close</button>
+                <span class="pull-right">{{entities.label}}</span>
+            </div>
+            <div class="modal-body">
+                آیا از حذف اطلاعات مطمئن هستید ؟
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">انصراف</button>
+                <button class="btn btn-success" ng-click="SendDelete()">حذف اطلاعات</button>
+            </div>
+        </div>
+    </div>
+</div>
