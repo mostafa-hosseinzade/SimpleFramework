@@ -349,21 +349,24 @@ class DBTable extends DataBase {
             foreach ($data as $key => $value) {
                 if ($i == 1) {
                     $sql_field .= "(" . $key . "";
-                    $sql_data .= " values ('" . $data[$key] . "'";
+                    $sql_data .= " values (:" . $key;
                 } else {
                     if ($i == $count_field) {
                         $sql_field .= "," . $key . ")";
-                        $sql_data .= ",'" . $data[$key] . "')";
+                        $sql_data .= ",:" . $key . ")";
                     } else {
                         $sql_field .= "," . $key;
-                        $sql_data .= ",'" . $data[$key] . "'";
+                        $sql_data .= ",:" . $key;
                     }
                 }
                 $i++;
             }
             $stmt = $this->pdo->prepare($sql_field . $sql_data);
-            $stmt->execute();
-            return true;
+            foreach ($data as $key => $value) {
+                $stmt->bindParam($key,$data[$key]);
+            }
+            $result = $stmt->execute();
+            return $result;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
             echo '<br><pre>';
@@ -385,19 +388,21 @@ class DBTable extends DataBase {
             foreach ($data as $key => $value) {
 
                 if ($i == $count_field) {
-                    $sql .=sprintf(" %s ='%s' where id='%s'", $key, $value, $data['id']);
+                    $sql .=sprintf(" %s =:%s where id=:%s", $key, $key, 'id');
                 } else {
                     if ($key != "id") {
-                        $sql .=sprintf(" %s ='%s' ,", $key, $value);
+                        $sql .=sprintf(" %s =:%s ,", $key, $key);
                     }
                 }
                 $i++;
             }
-
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute();
+            foreach ($data as $key => $value) {
+                $stmt->bindParam($key,$data[$key]);
+            }
+            $result = $stmt->execute();
 
-            return true;
+            return $result;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
             echo '<br><pre>';
