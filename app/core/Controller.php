@@ -19,7 +19,7 @@ abstract class Controller {
                 unset($param[0]);
                 unset($param[1]);
                 unset($param[2]);
-                call_user_method_array($method, $this, $param);
+                call_user_func_array(array($this, $method), $param);
             } else {
                 return $this->View('error/404.php');
             }
