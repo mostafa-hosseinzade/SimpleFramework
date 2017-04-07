@@ -18,22 +18,24 @@ class DataBase {
     private $DB_TYPE = DB_TYPE;
     private $DB_NAME = DB_NAME;
     private $DB_PORT = DB_PORT;
-    protected $pdo;
+    protected static $pdo = null;
 
     /**
      * Connect To DataBase
      */
     public function __construct() {
         try {
-            $this->pdo = new \PDO(
-                    $this->DB_TYPE .
-                    ":host=" . $this->DB_HOST .
-                    ";port=" . $this->DB_PORT .
-                    ";charset=utf8" .
-                    ";dbname=" . $this->DB_NAME, $this->DB_USERNAME, $this->DB_PASSWORD, array(
-                \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-            ));
-            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            if ($this->pdo == null) {
+                $this->pdo = new \PDO(
+                        $this->DB_TYPE .
+                        ":host=" . $this->DB_HOST .
+                        ";port=" . $this->DB_PORT .
+                        ";charset=utf8" .
+                        ";dbname=" . $this->DB_NAME, $this->DB_USERNAME, $this->DB_PASSWORD, array(
+                    \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+                ));
+                $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            }
         } catch (\PDOException $e) {
             return 'Can,t Connect to database' . $e->getMessage();
         }
@@ -61,8 +63,8 @@ class DataBase {
     public function getTable($table) {
         return new DBTable($table);
     }
-    
-     /**
+
+    /**
      * This Function for Speciale Query
      * @param string $sql
      * @return array
@@ -72,8 +74,26 @@ class DataBase {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
             $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-            
+
             return $data;
+        } catch (\PDOException $exc) {
+            echo $exc->getMessage();
+            echo '<br><pre>';
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    /**
+     * This function use for raw query
+     * @param String $sql
+     * @return response database
+     */
+    public function rawQuery($sql) {
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+
+            return $stmt;
         } catch (\PDOException $exc) {
             echo $exc->getMessage();
             echo '<br><pre>';
